@@ -1,0 +1,116 @@
+public class ListaDiInteri {
+	private int k;
+	private int m;
+	private int[] elle;
+	public ListaDiInteri(int[] elle) {
+		this.k=k;
+		this.elle=elle;
+		this.m=m;
+	}
+	public int restituisce(int k) {
+		return elle[k];
+	}
+	public int indice(int k) {
+		for (int i=0;i<elle.length;i++) {
+			if (k==elle[i])	return i;
+		}
+		return -1;
+	}
+	public String caratteri() {
+		String w="";
+		for (int i=0;i<elle.length;i++) {
+			w+=elle[i]+" ";
+		}
+		return w;
+	}
+	public int dim() {
+		return elle.length;
+	}
+	public boolean contiene(int k) {
+		for (int j=0;j<elle.length;j++) {
+			if (k==elle[j])	return true;
+		}
+		return false;
+	}
+	public void aggiungi(int k) {
+		int v=0;
+		int[] lista=new int[elle.length+1];
+		for (int m=0;m<elle.length;m++) {
+			v=elle[m];
+			lista[m]=v;
+			if (m==elle.length-1) lista[m+1]=k;
+		}
+		elle=lista;
+	}
+	public void inserisce(int k,int m) {
+		int[] lista=new int[elle.length+1];
+		int w=0;
+		for (int a=0;a<lista.length;a++) {
+			if (a<m) {
+				w=elle[a];
+				lista[a]=w;
+			}
+			else if (a==m) lista[a]=k;
+			else {
+				w=elle[a-1];
+				lista[a]=w;
+			}
+		}
+		elle=lista;
+		
+	}
+	public void occorrenza(int k) {
+		int s=0;
+		int b=0;
+		int[] ls=new int[elle.length-1];
+		for (int i=0;i<elle.length;i++) {
+			System.out.print(elle[i]+" ");
+			if (elle[i]==k && s==0)	s=1;
+			else {
+				if (s==0) {
+					b=elle[i];
+					ls[i]=b;
+				}
+				else {
+					b=elle[i];
+					ls[i-1]=b;
+				}
+			}
+		}
+		elle=ls;
+		System.out.println();
+	}
+	public void elimina(int k) {
+		int[] res=new int[elle.length-1];
+		int s=0;
+		int q=0;
+		for (int i=0;i<elle.length;i++) {
+			System.out.print(elle[i]+" ");
+			if (i==k)	s=1;
+			else {
+				if (s==0) {
+					q=elle[i];
+					res[i]=q;
+				}
+				else {
+					q=elle[i];
+					res[i-1]=q;
+				}
+			}
+		}
+		elle=res;
+		System.out.println();
+	}
+	public static void main(String[] args) {
+		ListaDiInteri elle=new ListaDiInteri(new int[] {1,3,4,8,12,15,30,26,23});
+		System.out.println(elle.restituisce(5));//restituisce k-esimo elemento
+		System.out.println(elle.indice(8));//restituisce indice del numero dato in input
+		System.out.println(elle.caratteri());//restituisce la stringa con gli interi
+		System.out.println(elle.dim());//restituisce la dimensione della lista
+		System.out.println(elle.contiene(8));//controlla se contiene il numero o meno		
+		elle.aggiungi(2);//aggiunto in coda
+		elle.inserisce(9,4);//aggiunto in posizione k-esima
+		elle.occorrenza(15);//elimina prima occorrenza del numero
+		elle.elimina(7);//elimina elem in posizione k-esima
+	}
+}
